@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div>
+	<h1>{{ listing.title }}</h1>
+</div>
+<div>
+	<h3>Sold by: {{ user.username }} </h3>
+</div>
+<div>
+	<div id="index_image"> <img src="{{ listing.image_url }}" alt="image" style="max-width: 20%; max-height: 50%;"> </div>
+</div>
+<div>
+	<p>{{ listing.description }}</p>
+</div>
+<div>
+	<h3> Starting bid: ${{ listing.price }}</h3>
+</div>
+<div>
+	<!-- insert ifelse statement -->
+	<form action="" method="POST">
+		{% csrf_token %}
+		<input name="bid" type="integer" maxlength="100">
+		<button type="button" class="btn btn-secondary"> Place Bid </button>
+	</form>
+	<!-- insert elseif statement -->
+	<form action="{% url 'add_watchlist' %}" method="post">
+		{% csrf_token %}
+		<input type="show" name="listing_id" value="{{ listing.id }}"/>
+		<button type="button" class="btn btn-secondary">Add to Watchlist</button>
+	</form>
+</div>
+<div>
+
+	<form action="{% url 'delete_watchlist' %}" method="post">
+		{% csrf_token %}
+		<input type="show" name="listing_id" value="{{ listing.id }}"/>
+		<button type="button" class="btn btn-secondary">Remove from Watchlist</button>
+	</form>
+</div>
+<div>
+	<h4>Add Comment</h4>
+</div>
+<form action="{% url 'create_listing' %}" method="post">
+	{% csrf_token %}
+	{{form.comment}}
+	<input type="text" name="comment" placeholder="Add a comment here">
+	<button type="button" class="btn btn-secondary">Add Comment</button>
+</form>
+
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<!-- insert if else statement here too -->
+	<h1> Your Watch List</h1>
+		{% for listing in user_watchlist %}
+		<li>{{ listing.title }}</li>
+    {% empty %}
+        No auctions in your watch list.
+    {% endfor %}
+	
+                    
+                    
+{% endblock %}

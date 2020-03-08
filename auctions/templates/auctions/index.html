@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h2>Active Listings</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            {% for listing in listings %}
+            <div class="col-sm">
+            <div class="card" style="width: 28rem;">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                    <img src="{{ listing.image_url }}" alt="image" style="max-width: 50%; max-height: 50%;">
+                    <h2> {{ listing.title }} </h2>
+                    <div>{{ listing.description }}</div>
+                    <div>Starting Price: ${{ listing.price }}</div>
+                    <div>Category: {{ listing.category }}</div>
+                    <div>Sold by: {{ user.username }}</div>
+                    <div><a href="{% url 'listing' listing.title %}"> 
+                        <button type="button" class="btn btn-secondary">View Auction</button></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    {% endblock %}
+
